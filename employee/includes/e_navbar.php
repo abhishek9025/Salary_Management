@@ -50,8 +50,19 @@ if(isset($_GET['user']))
         <span>Salary Data</span></a>
 </li>
 
+<!-- Logout -->
+
+<li class="nav-item">
+    
+    <a class="nav-link" href="http://localhost/sms/login/loginPage.php">
+    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 "></i>
+
+  
+    <span>Logout</span></a>
+</li>
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
+
 
 <!-- Sidebar Toggler (Sidebar) -->
 <div class="text-center d-none d-md-inline">

@@ -28,7 +28,8 @@
             $userData = mysqli_fetch_assoc($query_run);
            
         ?>
-            <table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
+        
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Employee Id</th>
@@ -58,7 +59,7 @@
                         <td><?php   echo $userData['Name'];   ?></td>
                         <td><?php   echo $userData['Email'];   ?></td>
                         <td><?php   echo $userData['Department'];   ?></td>
-                        <td><?php   echo $userData['Status'];   ?></td>
+                        <td><?php   echo $userData['Position'];   ?></td>
                         <td><?php   echo $userData['Status'];   ?></td>
                         
                     </tr>
@@ -77,14 +78,14 @@
 
         <!-- Content Row -->
 
-    </div>
+</div>
     <!-- /.container-fluid -->
 
-
+    </div>
 <!-- End of Main Content -->
 
 
-
+                
 
 
 <?php

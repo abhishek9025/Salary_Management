@@ -14,14 +14,15 @@ include('includes/e_navbar.php');
 
                     
         </div>
-        <input type="hidden" class="btn" value="Check Salary Status" name="salary">
         
-        <h5 style="color:dodgerblue;">Select Date to Check Salary</h5>
+        <!-- <h5 style="color:dodgerblue;">Select Month to Check Salary</h5> -->
+
+        <form action="#" method="post">
         
         <div class="form-group">
                         
                       
-                <select style="background:none ; border: 2px solid #4caf50; " placeholder="Month">
+                <!-- <select style="background:none ; border: 2px solid #4caf50; " placeholder="Month">
                 <option name="" value="" style="display:none;">Month</option>
                 <option name="January" value="Jan">January</option>
                 <option name="February" value="Feb">February</option>
@@ -40,7 +41,7 @@ include('includes/e_navbar.php');
                 <option name="" value="" style="display:none;">Year</option>
                 <option  name="2022" value="2022">2022</option>
                 <option name="2023" value="2023">2023</option>
-                </select>
+                </select> -->
 
                 
         </div>
@@ -61,6 +62,61 @@ include('includes/e_navbar.php');
                 }
          </style>
         <input type="submit" class="btn" value="Check Salary Status" name="salary">
+        </form>
+
+        <?php
+        $conn = mysqli_connect("localhost","root","","salary");
+
+        if(isset($_POST['salary'])){
+
+                $query="SELECT * FROM emp_salary WHERE Emp_id='".$_GET['user']."'";
+                $query_rn = mysqli_query($conn,$query);
+                // $row = mysqli_fetch_assoc($query_rn);
+
+
+        
+?>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Employee Id</th>
+                        <th>Salary</th>
+                        <th>Date<th>
+
+                        <!-- <th>Salary</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+
+                <?php
+                
+                if(mysqli_num_rows($query_rn)>0){
+                    while($row= mysqli_fetch_assoc($query_rn)){
+                        
+                        ?>
+
+                        
+                
+                    <tr>
+                        <td><?php   echo $row['Emp_id'];   ?></td>
+                        <td><?php   echo $row['Salary'];   ?></td>
+                        <td><?php   echo $row['date'];   ?></td>
+                       
+                        
+                        
+                    </tr>
+                    <?php
+                    }
+                }
+                else{
+                        echo "NO Record Found";
+                    }
+        }
+                
+                ?>
+                </tbody>
+            </table>
+
         
 </div>
 

@@ -105,6 +105,13 @@
         <span>Salary</span></a>
 </li>
 
+<li class="nav-item">
+    
+    <a class="nav-link" href="http://localhost/sms/login/loginPage.php">
+    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 "></i>
+    <span>Logout</span></a>
+</li>
+
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
 
@@ -113,7 +120,13 @@
     <button class="rounded-circle border-0" id="sidebarToggle"></button>
 </div>
 
+
+
 </ul>
+
+<!-- Logout -->
+
+
 <!-- End of Sidebar -->
 
     <!-- Scroll to Top Button-->

@@ -72,7 +72,7 @@ include('includes/navbar.php');
                                     }
                                 </style>
             <button  type="button" class="btn-btn-primary" data-toggle="modal" data-target="#addemployeesalary">
-            Add Employee Salary
+            Credit Employee Salary
             </button>
         </h6>
     </div>
@@ -104,9 +104,7 @@ include('includes/navbar.php');
                     <tr>
                         <th>Employee Id</th>
                         <th>Salary</th>
-                        <th>Date<th>
-
-                        <!-- <th>Salary</th> -->
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
