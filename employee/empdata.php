@@ -61,15 +61,32 @@ include('includes/e_navbar.php');
                         background-color: #4caf50;
                 }
          </style>
-        <input type="submit" class="btn" value="Check Salary Status" name="salary">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+        $("#btnhide").click(function(){
+        $("#dataTable").hide();
+        });
+        
+        });
+        </script>
+        <input type="submit" class="btn" value="Check Salary Details" name="salary">
+        <input type="submit" class="btn" id="btnhide" value="Hide Salary Details" name="Hide">
         </form>
 
         <?php
         $conn = mysqli_connect("localhost","root","","salary");
+        
+        include("encode.php");
 
+        if(isset($_POST['Hide'])){
+                // header("Location: http://localhost/sms/employee/empdata.php?user=".base64_url_decode($_GET['user']));
+        }
         if(isset($_POST['salary'])){
 
-                $query="SELECT * FROM emp_salary WHERE Emp_id='".$_GET['user']."'";
+                // $query="SELECT * FROM emp_salary WHERE Emp_id='".$_GET['user']."'";
+                $query="SELECT * FROM emp_salary WHERE Emp_id='". base64_url_decode($_GET['user'])."'";
+
                 $query_rn = mysqli_query($conn,$query);
                 // $row = mysqli_fetch_assoc($query_rn);
 
@@ -81,9 +98,7 @@ include('includes/e_navbar.php');
                     <tr>
                         <th>Employee Id</th>
                         <th>Salary</th>
-                        <th>Date<th>
-
-                        <!-- <th>Salary</th> -->
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -109,8 +124,8 @@ include('includes/e_navbar.php');
                     }
                 }
                 else{
-                        echo "NO Record Found";
-                    }
+                    echo "NO Record Found";
+                }
         }
                 
                 ?>

@@ -4,7 +4,7 @@ session_start();
 $conn = mysqli_connect("localhost","root","","salary");
 
 if(isset($_POST['registerbtn'])){
-
+    
     $emp_id=$_POST['emp_id'];
     $date=$_POST['date'];
     $salary=$_POST['salary'];

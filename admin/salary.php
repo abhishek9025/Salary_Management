@@ -21,16 +21,16 @@ include('includes/navbar.php');
 
         <div class="form-group">
             <label> Employee Id </label>
-            <input type="number" name="emp_id" class="form-control" placeholder="Enter Employee Id" >        
+            <input type="number" name="emp_id" class="form-control" placeholder="Enter Employee Id" required>        
         </div>
         
         <div class="form-group">
             <label> Salary </label>
-            <input type="text" name="salary" class="form-control" placeholder="Enter Salary" >        
+            <input type="text" name="salary" class="form-control" placeholder="Enter Salary" required>        
         </div>
         <div class="form-group">
             <label> Date </label>
-            <input type="date" id="start" name="date" class="form-control" min="2022-01" value="2022-03">
+            <input type="date" id="start" name="date" class="form-control" min="2022-01" value="2022-03"required>
         
         </div>
         
@@ -46,7 +46,15 @@ include('includes/navbar.php');
         
             <!-- <button name="Cancel" type="submit"  value="Cancel">Cancel</button> -->
         
-        <button type="submit" name ="registerbtn" class="btn btn-primary">Credit Salary</button>
+        <button type="submit" name ="registerbtn" id="test1" class="btn btn-primary" value="Salary is Credited">Credit Salary</button>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+        $("#test1").click(function(){
+            alert( $("#test1").val());
+        });
+        });
+</script>
         
         </div>
     </form>   
@@ -96,7 +104,7 @@ include('includes/navbar.php');
 
         <?php
         $conn = mysqli_connect("localhost","root","","salary");
-        $query="SELECT * FROM emp_salary";
+        $query="SELECT * FROM emp_salary ORDER BY Emp_id ASC";
         $query_run = mysqli_query($conn,$query);
         ?>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

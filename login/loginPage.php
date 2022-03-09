@@ -19,8 +19,11 @@
     
 
     if($row["Email"]==$email && $row["Password"]==$password){
+      include("encode.php");
+
+      base64_url_encode($row['Emp_id']);
       
-      header("Location: http://localhost/sms/employee/e_index.php?user=".$row['Emp_id']);
+      header("Location: http://localhost/sms/employee/e_index.php?user=".base64_url_encode($row['Emp_id']));
     }
       
     else{
@@ -41,7 +44,7 @@
 
   if($row["Name"]==$email && $row["Password"]==$password){
     header("Location: http://localhost/sms/admin/index.php");
-    // echo "admin";
+    echo "admin";
   }
   else{
     $errmsg="InCorrect Username or Password";
@@ -95,7 +98,7 @@
   <?php
   }
   ?>
-  <a class="atag" style="color:blue;" href=forgotpwd.php>Forgot Password</a>
+  <!-- <a class="atag" style="color:blue;" href=forgotpwd.php>Forgot Password</a> -->
 
 </div>
 </form>
