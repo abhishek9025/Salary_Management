@@ -38,11 +38,6 @@ include('includes/navbar.php');
             <input type="text" name="position" class="form-control" placeholder="Enter Position" >        
         </div>
         <div class="form-group">
-            <!-- <label for="Status"> Status </label>
-            <select name="status" class="form-control">
-                <option value="Active">Active</option>
-                <option value="InActive">InActive</option>
-            </select> -->
             <label for="status">Status</label>
             <select name="status" id="status" class="form-control" >
             <option value="">Select</option>
@@ -78,6 +73,16 @@ include('includes/navbar.php');
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
 <div class="container-fluid">
  <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -169,7 +174,8 @@ include('includes/navbar.php');
                         </td>
                         <td>
                         <form action="code.php" method="POST">
-                            <input type="hidden" name="delete_id" value="<?php echo $row['Emp_id'];?>">
+                            <input type="hidden" name="delete_id" id="delete_id" value="<?php echo $row['Emp_id'];?>">
+                        
                             <style>
                                     .btn-btn-nsuccess{
                                         background: red; 
@@ -182,8 +188,17 @@ include('includes/navbar.php');
                                         background-color:#FF6347 ;
                                     }
                             </style>
-                            <button type="submit" name="delete_btn" class="btn-btn-nsuccess" >DELETE</button>
+                            <script>
+                            function myFunction() {
+                            confirm("Do you want to delete!");
+                            }
+                            </script>
+                            <!-- <button type="button" name="delete_btn" class="btn-btn-nsuccess" data-toggle="modal" data-target="#deleteemployeeprofile">DELETE</button> -->
+                            <button type="submit" name="delete_btn"  onclick="myFunction()"  class="btn-btn-nsuccess">DELETE</button>
                             </form>
+                                    
+
+
                         </td>
                         
                     </tr>
@@ -199,6 +214,40 @@ include('includes/navbar.php');
         </div>
     </div>
             
+<!-- <div class="modal fade" id="delemployeeprofile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sure!</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <form action="#" method="POST">
+        <div class="modal-body">
+
+        <p>Are You Sure, You want to Delete</p>
+                
+
+    </div>
+
+     
+    
+        <div class="modal-footer">
+        
+            <button type="button" value="Close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+            <button name="Cancel" type="submit"  value="Cancel">Cancel</button> -->
+        
+        <!-- <button type="submit" name="delbtn" class="btn btn-primary">Delete</button>
+        
+        </div>
+    </form>   
+    
+
+    </div>
+  </div>
+</div>  -->
 
 <?php
 include('includes/scripts.php');

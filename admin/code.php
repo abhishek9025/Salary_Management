@@ -3,6 +3,8 @@
 session_start();
 $conn = mysqli_connect("localhost","root","","salary");
 
+
+
 if(isset($_POST['registerbtn'])){
 
     $emp_id=$_POST['emp_id'];
@@ -33,24 +35,30 @@ if(isset($_POST['registerbtn'])){
 }
 
 
-if(isset($_POST['delete_btn'])){
-    $id= $_POST['delete_id'];
+
+    
+if(isset($_POST['delete_btn'])  ) {
+    $id= isset($_POST['delete_id']);
+    
     $query= "DELETE FROM emp_list WHERE Emp_id='$id' ";
     
     $query_run= mysqli_query($conn,$query);
-
-
+    
+    
     if($query_run){
         
         $_SESSION['success'] = "Employee Data is Deleted";
         header('Location: register.php');
     }
     else{
-        
+
         $_SESSION['status'] = "Employee Data is not Deleted";
         header('Location: register.php');
     }
+        
 }
+
+    
 
 
 if(isset($_POST['updatebtn'])){
