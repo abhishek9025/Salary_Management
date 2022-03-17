@@ -2,7 +2,18 @@
 session_start();
 include('includes/header.php');
 include('includes/navbar.php');
+
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".delete").click(function(){
+    //   $('.confirm-btn').val('');
+      $('.confirm-btn').val($(this).data("emp"));
+    
+  });
+});
+</script>
 
 <!-- Modal -->
 <div class="modal fade" id="addemployeeprofile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,9 +66,6 @@ include('includes/navbar.php');
         </div>
 
     </div>
-
-     
-    
         <div class="modal-footer">
         
             <button type="button" value="Close" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -74,6 +82,34 @@ include('includes/navbar.php');
   </div>
 </div>
 
+<div class="modal fade" id="delemployeeprofile" tabindex="10" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Please Confirm</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+    <form action="code.php" method="POST">
+        <div class="modal-body">
+        <p>Do you want to delete!</p>
+
+        </div>
+
+     
+    
+        <div class="modal-footer">
+        
+            <button type="button" value="Close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" name ="del_btn" value="" class="btn btn-primary confirm-btn">Confirm</button>
+        
+        </div>
+    </form>   
+    </div>
+  </div>
+</div>
 
 
 
@@ -88,6 +124,19 @@ include('includes/navbar.php');
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Employee Profile
+            <style>
+                    .btn-btn-primary
+                    {
+                        background:blue; 
+                        border:white; color:white; 
+                        height:25px;
+                        border-radius: 8px;
+                    }
+                    .btn-btn-primary:hover{
+                                        background-color: dodgerblue;
+                                    }
+            </style>
+        
             <button type="button" class="btn-btn-primary" data-toggle="modal" data-target="#addemployeeprofile">
             Add Employee Profile
             </button>
@@ -112,9 +161,18 @@ include('includes/navbar.php');
         <div class="table-responsive">
 
         <?php
+        $limit = 3;
+        if(isset($_GET['page'] )){
+            $page = $_GET['page'];
+        }
+        else{
+            $page = 1;
+        }
+        $offset = ($page - 1) * $limit;
+
         $conn = mysqli_connect("localhost","root","","salary");
-        $query="SELECT * FROM emp_list";
-        $query_run = mysqli_query($conn,$query);
+        $query="SELECT * FROM emp_list ORDER BY Emp_id ASC LIMIT {$offset}, {$limit}";
+        $query_run = mysqli_query($conn,$query) or die("Query failed");
         ?>
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -173,8 +231,8 @@ include('includes/navbar.php');
                         
                         </td>
                         <td>
-                        <form action="code.php" method="POST">
-                            <input type="hidden" name="delete_id" id="delete_id" value="<?php echo $row['Emp_id'];?>">
+                        
+                            <input type="hidden" name="delete_id" value="<?php echo $row['Emp_id'];?>">
                         
                             <style>
                                     .btn-btn-nsuccess{
@@ -189,65 +247,71 @@ include('includes/navbar.php');
                                     }
                             </style>
                             <script>
-                            function myFunction() {
-                            confirm("Do you want to delete!");
-                            }
+                            //  function myFunction() {
+                            //  confirm("Do you want to delete!");
+                            // }
                             </script>
-                            <!-- <button type="button" name="delete_btn" class="btn-btn-nsuccess" data-toggle="modal" data-target="#deleteemployeeprofile">DELETE</button> -->
-                            <button type="submit" name="delete_btn"  onclick="myFunction()"  class="btn-btn-nsuccess">DELETE</button>
-                            </form>
+                            <button type="button" name="delete_btn" data-emp=<?php echo $row['Emp_id'];?> class="btn-btn-nsuccess delete" data-toggle="modal" data-target="#delemployeeprofile" >DELETE</button>
+                            <!-- <button type="submit" name="delete_btn"  onclick="myFunction()"  class="btn-btn-nsuccess" >DELETE</button> -->
+                           
                                     
 
 
                         </td>
                         
                     </tr>
+                    
                     <?php
                     }
                 }
+                
                 else{
                     echo "NO Record Found";
                 }
+                
+                $sql1="SELECT * FROM emp_list";
+                $result1 = mysqli_query($conn,$sql1) or die("Query failed");
+
+                if(mysqli_num_rows($result1) > 0){
+                    $total_records = mysqli_num_rows($result1);
+                    
+                    $total_page = ceil($total_records/ $limit);
+                    echo '<ul class="pagination admin-pagination">';
+                    if($page > 1){
+                        echo '<li><a href="register.php?page='.($page - 1).'">Prev</a></li>';
+                    }
+                    for($i = 1; $i <= $total_page; $i++){
+                        if($i == $page)
+                        {
+                            $active="active";
+                        }     
+                        else{
+                            $active="";
+
+                        }                   
+
+                            echo '<li class="'.$active.'"><a class="changeable" style="margin-left: 10px;" href="register.php?page='.$i.' ">'.$i.'</a></li>';
+                    }
+                    if($total_page> $page){
+                        echo '<li><a style="margin-left: 10px;" href="register.php?page='.($page + 1).'">Next</a></li>';
+                    }
+                    echo '</ul>';
+                }
                 ?>
+                <style>
+                    a:link {color:#000000;}    /* unvisited link is black*/
+                    a:visited {color:blue;} /* visited link is black (reverse the color back to black)*/
+                    a:hover {color:black;}   /* mouse over link (blue when mouse over)*/
+                    a:active {color:#0000FF;}
+                </style>
+                
                 </tbody>
             </table>
-        </div>
-    </div>
             
-<!-- <div class="modal fade" id="delemployeeprofile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Sure!</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <form action="#" method="POST">
-        <div class="modal-body">
-
-        <p>Are You Sure, You want to Delete</p>
-                
-
-    </div>
-
-     
-    
-        <div class="modal-footer">
-        
-            <button type="button" value="Close" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
-            <button name="Cancel" type="submit"  value="Cancel">Cancel</button> -->
-        
-        <!-- <button type="submit" name="delbtn" class="btn btn-primary">Delete</button>
-        
         </div>
-    </form>   
-    
-
     </div>
-  </div>
-</div>  -->
+
+
 
 <?php
 include('includes/scripts.php');

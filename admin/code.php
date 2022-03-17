@@ -35,10 +35,11 @@ if(isset($_POST['registerbtn'])){
 }
 
 
-
     
-if(isset($_POST['delete_btn'])  ) {
-    $id= isset($_POST['delete_id']);
+
+   
+if(isset($_POST['del_btn'])  ) {
+    $id= $_POST['del_btn'];
     
     $query= "DELETE FROM emp_list WHERE Emp_id='$id' ";
     

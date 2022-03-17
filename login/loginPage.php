@@ -66,28 +66,31 @@
   
   <h1>Salary Management System</h1>
 
-  <form action="#" method="POST">
+  <form action="#" method="POST" onsubmit="return validation()">
 <div class="login-box">
   <h2>Login</h2>
   <div class="textbox">
     <i class="fas fa-user"></i>
-    <input type="text" placeholder="Username" name="Email" required>
+    <input type="text" placeholder="Email" name="Email" id="user"  >
   </div>
+  <span id ="username" style="color:red" class="text-danger font-weight-bold"></span>
 
   <div class="textbox">
     <i class="fas fa-lock"></i>
-    <input type="password" placeholder="Password" name= "password" required>
+    <input type="password" placeholder="Password" name= "password" id="pass" >
   </div>
+  <span id ="password" style="color:red" class="text-danger font-weight-bold"></span>
    
   <div class="drop">
       <!-- <label for="usertype"></label> -->
-      <select style="background:none ; border: 2px solid #4caf50; " name="usertype" id="usertype" class="textbox" required>
+      <select style="background:none ; border: 2px solid #4caf50; " name="usertype" id="usertype" class="textbox" >
       <option value="">Select Usertype</option>
           <option  style="background:none ; " value="Admin">Admin</option>
           <option style="background:none ; " value="Employee">Employee</option>
       </select>
 
   <div>
+  <span id ="type" style="color:red" class="text-danger font-weight-bold"></span>
   
 
   <input type="submit" class="btn" value="Login" name="login">
@@ -102,5 +105,28 @@
 
 </div>
 </form>
+<script type="text/javascript">
+
+function validation(){
+  var user = document.getElementById('user').value;
+  var password = document.getElementById('pass').value;
+  var usertype = document.getElementById('usertype').value;
+
+  if(user == ""){
+    document.getElementById('username').innerHTML = "*Please Fill Email field";
+    return false;
+  }
+  if(password == ""){
+    document.getElementById('password').innerHTML = "*Please Fill Password field";
+    return false;
+  }
+  if(usertype == ""){
+    document.getElementById('type').innerHTML = "*Please Select Usertype";
+    return false;
+  }
+
+}
+
+</script>
 </body>
 </html>

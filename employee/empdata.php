@@ -22,26 +22,27 @@ include('includes/e_navbar.php');
         <div class="form-group">
                         
                       
-                <!-- <select style="background:none ; border: 2px solid #4caf50; " placeholder="Month">
-                <option name="" value="" style="display:none;">Month</option>
-                <option name="January" value="Jan">January</option>
-                <option name="February" value="Feb">February</option>
-                <option name="March" value="Mar">March</option>
-                <option name="April" value="Apr">April</option>
-                        <option name="May" value="May">May</option>
-                <option name="June" value="Jun">June</option>
-                <option name="July" value="Jul">July</option>
-                <option name="August" value="Aug">August</option>
-                        <option name="September" value="Sep">September</option>
-                <option name="October" value="Oct">October</option>
-                <option name="November" value="Nov">November</option>
-                <option name="December" value="Dec">December</option>
+                <select style="background:none ; border: 2px solid #4caf50; " name="month" id="month" >
+                <option value="" style="display:none;">Month</option>
+                <option  value="01">January</option>
+                <option  value="02">February</option>
+                <option  value="03">March</option>
+                <option  value="04">April</option>
+                <option  value="05">May</option>
+                <option  value="06">June</option>
+                <option  value="07">July</option>
+                <option  value="08">August</option>
+                <option  value="09">September</option>
+                <option  value="10">October</option>
+                <option  value="11">November</option>
+                <option  value="12">December</option>
                 </select>
-                <select style="background:none ; border: 2px solid #4caf50; " placeholder="Year">
+
+                <select style="background:none ; border: 2px solid #4caf50; " name="year" id="year" placeholder="Year">
                 <option name="" value="" style="display:none;">Year</option>
-                <option  name="2022" value="2022">2022</option>
-                <option name="2023" value="2023">2023</option>
-                </select> -->
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                </select>
 
                 
         </div>
@@ -71,7 +72,6 @@ include('includes/e_navbar.php');
         });
         </script>
         <input type="submit" class="btn" value="Check Salary Details" name="salary">
-        <input type="submit" class="btn" id="btnhide" value="Hide Salary Details" name="Hide">
         </form>
 
         <?php
@@ -83,12 +83,16 @@ include('includes/e_navbar.php');
                 // header("Location: http://localhost/sms/employee/empdata.php?user=".base64_url_decode($_GET['user']));
         }
         if(isset($_POST['salary'])){
-
+                $month= $_POST["month"];
+                $year = $_POST["year"];
                 // $query="SELECT * FROM emp_salary WHERE Emp_id='".$_GET['user']."'";
-                $query="SELECT * FROM emp_salary WHERE Emp_id='". base64_url_decode($_GET['user'])."'";
-
+                $query="SELECT * FROM emp_salary WHERE Emp_id='". base64_url_decode($_GET['user'])."' AND MONTH(date)='$month' AND YEAR(date)='$year' ";
+                // die($query);
                 $query_rn = mysqli_query($conn,$query);
                 // $row = mysqli_fetch_assoc($query_rn);
+
+                if(mysqli_num_rows($query_rn)>0){
+                        while($row= mysqli_fetch_assoc($query_rn)){
 
 
         
@@ -99,14 +103,14 @@ include('includes/e_navbar.php');
                         <th>Employee Id</th>
                         <th>Salary</th>
                         <th>Date</th>
+                        <th>Message</th>
                     </tr>
                 </thead>
                 <tbody>
 
                 <?php
                 
-                if(mysqli_num_rows($query_rn)>0){
-                    while($row= mysqli_fetch_assoc($query_rn)){
+                
                         
                         ?>
 
@@ -116,6 +120,7 @@ include('includes/e_navbar.php');
                         <td><?php   echo $row['Emp_id'];   ?></td>
                         <td><?php   echo $row['Salary'];   ?></td>
                         <td><?php   echo $row['date'];   ?></td>
+                        <td><?php   echo $row['message'];   ?></td>
                        
                         
                         
@@ -124,7 +129,7 @@ include('includes/e_navbar.php');
                     }
                 }
                 else{
-                    echo "NO Record Found";
+                    echo "Sorry! No Record Found";
                 }
         }
                 
