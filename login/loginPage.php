@@ -82,7 +82,7 @@
   <span id ="password" style="color:red" class="text-danger font-weight-bold"></span>
    
   <div class="drop">
-      <!-- <label for="usertype"></label> -->
+      
       <select style="background:none ; border: 2px solid #4caf50; " name="usertype" id="usertype" class="textbox" >
       <option value="">Select Usertype</option>
           <option  style="background:none ; " value="Admin">Admin</option>
@@ -101,7 +101,7 @@
   <?php
   }
   ?>
-  <!-- <a class="atag" style="color:blue;" href=forgotpwd.php>Forgot Password</a> -->
+  
 
 </div>
 </form>

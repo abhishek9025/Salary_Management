@@ -34,12 +34,12 @@ if(isset($_POST['registerbtn'])){
             $query_run = mysqli_query($conn, $query);
 
             if($query_run){
-                // echo "Saved";
+                
                 $_SESSION['success'] = "Employee Salary Credited";
                 header('Location: salary.php');
             }
             else{
-                // echo "Not Saved";
+                
                 $_SESSION['status'] = "Employee Salary not Credited";
                 header('Location: salary.php');
             }

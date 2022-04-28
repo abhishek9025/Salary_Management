@@ -70,7 +70,7 @@ $(document).ready(function(){
         
             <button type="button" value="Close" class="btn btn-secondary" data-dismiss="modal">Close</button>
         
-            <!-- <button name="Cancel" type="submit"  value="Cancel">Cancel</button> -->
+            
         
         <button type="submit" name ="registerbtn" class="btn btn-primary">Save</button>
         
@@ -88,18 +88,14 @@ $(document).ready(function(){
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Please Confirm</h5>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true">&times;</span> 
         </button>
       </div>
       
     <form action="code.php" method="POST">
         <div class="modal-body">
         <p>Do you want to delete!</p>
-
         </div>
-
-     
-    
         <div class="modal-footer">
         
             <button type="button" value="Close" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -174,7 +170,7 @@ $(document).ready(function(){
         $query="SELECT * FROM emp_list ORDER BY Emp_id ASC LIMIT {$offset}, {$limit}";
         $query_run = mysqli_query($conn,$query) or die("Query failed");
         ?>
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" >
                 <thead>
                     <tr>
                         <th>Employee Id</th>
@@ -188,7 +184,7 @@ $(document).ready(function(){
                         <th>Edit</th>
                         <th>Delete</th>
 
-                        <!-- <th>Salary</th> -->
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -246,13 +242,9 @@ $(document).ready(function(){
                                         background-color:#FF6347 ;
                                     }
                             </style>
-                            <script>
-                            //  function myFunction() {
-                            //  confirm("Do you want to delete!");
-                            // }
-                            </script>
+                            
                             <button type="button" name="delete_btn" data-emp=<?php echo $row['Emp_id'];?> class="btn-btn-nsuccess delete" data-toggle="modal" data-target="#delemployeeprofile" >DELETE</button>
-                            <!-- <button type="submit" name="delete_btn"  onclick="myFunction()"  class="btn-btn-nsuccess" >DELETE</button> -->
+                            
                            
                                     
 

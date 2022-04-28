@@ -141,7 +141,7 @@ include('includes/navbar.php');
         $query="SELECT * FROM emp_salary ORDER BY Emp_id ASC, date ASC LIMIT {$offset}, {$limit}";
         $query_run = mysqli_query($conn,$query);
         ?>
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" >
                 <thead>
                     <tr>
                         <th>Employee Id</th>

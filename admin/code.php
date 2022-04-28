@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-$conn = mysqli_connect("localhost","root","","salary");
 
+include('db.php');
 
 
 if(isset($_POST['registerbtn'])){
@@ -23,17 +23,17 @@ if(isset($_POST['registerbtn'])){
     $query_run = mysqli_query($conn, $query);
 
     if($query_run){
-        // echo "Saved";
+        
         $_SESSION['success'] = "Employee Profile Added";
         header('Location: register.php');
     }
     else{
-        // echo "Not Saved";
+        
         $_SESSION['status'] = "Employee Profile Not Added";
         header('Location: register.php');
     }
 }
-
+// 
 
     
 
